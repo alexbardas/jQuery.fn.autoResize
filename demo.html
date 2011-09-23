@@ -1,0 +1,40 @@
+<!doctype html>
+
+<meta charset="utf-8" />
+
+<title>autoResize demo</title>
+
+<style>
+	body {
+		width: 700px;
+		font-family: sans-serif;
+	}
+	h1 {
+		margin: 0;
+		padding: 10px 0 20px;
+	}
+	textarea, input {
+		font-family: inherit;
+		font-size: 1em;
+	}
+</style>
+
+<h1>Textarea</h1>
+
+<textarea></textarea>
+
+<h1>Input</h1>
+
+<input />
+
+
+<a href="http://google.com">GOOO</a>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+<script src="jquery.autoresize.js"></script>
+<script>
+	///$('textarea').hide();
+	$('*').autoResize({minHeight:100,minWidth:300});
+
+	///setTimeout(function(){$('textarea').show();},2000);
+</script>
