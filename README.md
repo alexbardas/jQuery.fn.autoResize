@@ -35,3 +35,13 @@ Available options include:
 ---
 
 **Please report bugs in Github (the issues tab).**
+
+### Tested on the following browsers:
+
+ * Opera 11.5
+ * Firefox 4/6
+ * Safari 5.0
+ * IE9 (*IE6-8 too, but see below*)
+ * Chrome 15
+
+*Note*: It will work in IE6-8 also, but only if your TEXTAREA has `display:block;` (`display:inline;`, the default, doesn't appear to work very well)

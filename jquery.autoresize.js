@@ -1,7 +1,7 @@
 /*
  * jQuery.fn.autoResize 1.1
  * --
- * https://github.com/jamespadolsey/autoResize
+ * https://github.com/jamespadolsey/jQuery.fn.autoResize
  * --
  * This program is free software. It comes without any warranty, to
  * the extent permitted by applicable law. You can redistribute it
@@ -35,7 +35,8 @@
 		position: 'absolute',
 		top: -9999,
 		left: -9999,
-		opacity: 0
+		opacity: 0,
+		overflow: 'hidden'
 	};
 
 	autoResize.resizableFilterSelector = 'textarea,input:not(input[type]),input[type=text],input[type=password]';
@@ -87,13 +88,16 @@
 
 		bind: function() {
 
-			var check = $.proxy(this, 'check');
+			var check = $.proxy(function(){
+				this.check();
+				return true;
+			}, this);
 
 			this.unbind();
 
 			this.el
 				.bind('keyup.autoResize', check)
-				.bind('keydown.autoResize', check)
+				//.bind('keydown.autoResize', check)
 				.bind('change.autoResize', check);
 			
 			this.check(null, true);
@@ -170,10 +174,12 @@
 				return;
 
 			}
+
+			// TEXTAREA
 			
 			clone.height(0).val(value).scrollTop(10000);
 			
-			var scrollTop = clone.scrollTop() + config.extraSpace;
+			var scrollTop = clone[0].scrollTop + config.extraSpace;
 				
 			// Don't do anything if scrollTop hasen't changed:
 			if (this.previousScrollTop === scrollTop) {
@@ -183,8 +189,11 @@
 			this.previousScrollTop = scrollTop;
 			
 			if (scrollTop >= config.maxHeight) {
+				el.css('overflowY', '');
 				return;
 			}
+
+			el.css('overflowY', 'hidden');
 
 			if (scrollTop < config.minHeight) {
 				scrollTop = config.minHeight;
@@ -198,8 +207,6 @@
 					height: scrollTop
 				}, config.animate)
 				: el.height(scrollTop);
-
-			clone.height(scrollTop);
 			
 		},
 
